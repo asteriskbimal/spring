@@ -10,7 +10,6 @@ import javax.xml.ws.ServiceMode;
 
 import extra.credit.imdb.model.Movie;
 
-
 public class MovieDao {
 
 	private static EntityManagerFactory emf;
@@ -27,19 +26,34 @@ public class MovieDao {
 	EntityManager em = emf.createEntityManager();
 	EntityTransaction tx = em.getTransaction();
 
-	public void saveMovie(Movie movie) {
-		movie.save(student);
-		emf.close();
+	public Movie saveMovie(Movie movie) {
+
+		Movie attached = em.find(Movie.class, movie.getId());
+		if (attached != null) em.persist(attached);	
+		return attached;
+	}
+
+	public void updateMovie(Movie movie) {
+
+		Movie attached = em.find(Movie.class, movie.getId());
+
+	}
+
+
+
+	public Movie getMovie(int id) {
+		Movie movie = em.find(Movie.class, id);
+		return movie;
 
 	}
 
 	public void deleteMovie(int id) {
-		
-		  Movie movie = em.find(Movie.class, id);
-		  em.getTransaction().begin();
-		  em.remove(movie);
-		  em.getTransaction().commit();
-		  emf.close();
+
+		Movie movie = em.find(Movie.class, id);
+		em.getTransaction().begin();
+		em.remove(movie);
+		em.getTransaction().commit();
+		emf.close();
 
 	}
 
@@ -50,7 +64,7 @@ public class MovieDao {
 		tx.commit();
 		emf.close();
 		return movies;
-        
+
 	}
 
 }
