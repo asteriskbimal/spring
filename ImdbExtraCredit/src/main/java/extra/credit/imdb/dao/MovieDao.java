@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.xml.ws.ServiceMode;
+
 
 import extra.credit.imdb.model.Movie;
 
@@ -24,22 +24,20 @@ public class MovieDao {
 	}
 
 	EntityManager em = emf.createEntityManager();
-	EntityTransaction tx = em.getTransaction();
-
+	
 	public Movie saveMovie(Movie movie) {
 
 		Movie attached = em.find(Movie.class, movie.getId());
-		if (attached != null) em.persist(attached);	
+		if (attached != null) em.persist(movie);	
 		return attached;
 	}
 
-	public void updateMovie(Movie movie) {
-
-		Movie attached = em.find(Movie.class, movie.getId());
+	public void updateMovie(Movie movie,int id) {
+        movie.setId(id);
+		em.merge(movie);
+		
 
 	}
-
-
 
 	public Movie getMovie(int id) {
 		Movie movie = em.find(Movie.class, id);
@@ -59,10 +57,7 @@ public class MovieDao {
 
 	public List<Movie> getAllMovies() {
 
-		tx.begin();
 		List<Movie> movies = em.createQuery("from Movie").getResultList();
-		tx.commit();
-		emf.close();
 		return movies;
 
 	}
