@@ -5,20 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Character {
+public class Characters {
 
 	@Id
 	@GeneratedValue
 	private int characterId;
-	@Column(name="character")
+	@Column(name="charz")
 	private String name;
 	@OneToOne
-	@JoinColumn(name = "actorId")
+	@JoinColumn(name = "id")
 	private Actor actor;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "movieId")
 	private Movie movie;
 	
@@ -39,20 +40,20 @@ public class Character {
 		this.movie = movie;
 	}
 
-	public int getId() {
+
+	public int getCharacterId() {
 		return characterId;
 	}
 
-	public void setId(int id) {
-		this.characterId = id;
+	public void setCharacterId(int characterId) {
+		this.characterId = characterId;
 	}
 
-
-	public Character(String name) {
+	public Characters(String name) {
 		this.name = name;
 	}
 
-	public Character() {
+	public Characters() {
 		super();
 	}
 

@@ -16,15 +16,8 @@ public abstract class Person {
 	@GeneratedValue
 	int id;
 	String name;
-	private List<Movie> movies = new ArrayList<Movie>();
+	
 
-	public List<Movie> getMovies() {
-		return movies;
-	}
-
-	public void setMovies(List<Movie> movies) {
-		this.movies = movies;
-	}
 
 	public int getId() {
 		return id;

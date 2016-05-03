@@ -6,6 +6,11 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>extra.credit.imdb.model.Movie</class>
 		<class>extra.credit.imdb.model.Actor</class>
+		<class>extra.credit.imdb.model.Director</class>
+		<class>extra.credit.imdb.model.Characters</class>
+		<class>extra.credit.imdb.model.Person</class>
+		<class>extra.credit.imdb.model.Comments</class>
+		
 		<properties>
 			<property name="hibernate.connection.driver_class" value=" com.mysql.jdbc.Driver" />
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/imdb?createDatabaseIfNotExist=true" />

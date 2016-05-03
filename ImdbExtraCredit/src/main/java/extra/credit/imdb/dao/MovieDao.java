@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 
 import extra.credit.imdb.model.Movie;
 
-public class MovieDao {
+public class MovieDao implements IMovieDao{
 
 	private static EntityManagerFactory emf;
 
@@ -27,13 +27,13 @@ public class MovieDao {
 	
 	public Movie saveMovie(Movie movie) {
 
-		Movie attached = em.find(Movie.class, movie.getId());
+		Movie attached = em.find(Movie.class, movie.getMovieId());
 		if (attached != null) em.persist(movie);	
 		return attached;
 	}
 
 	public void updateMovie(Movie movie,int id) {
-        movie.setId(id);
+        movie.setMovieId(id);
 		em.merge(movie);
 		
 

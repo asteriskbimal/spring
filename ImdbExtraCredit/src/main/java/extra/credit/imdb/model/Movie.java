@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -28,47 +29,42 @@ public class Movie {
 	private int rating;
 	private Date releaseYear;
 	private String name;
-	private String comment;
+	
+	@OneToMany
+	private List<Comments> comments=new ArrayList<Comments>();
+	
 	@Lob
 	private byte[] cover;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="Movie_Actor",
 	joinColumns=@JoinColumn(name="movieId"),
-	inverseJoinColumns=@JoinColumn(name="actorId"))
+	inverseJoinColumns=@JoinColumn(name="id"))
 	List<Actor> actors = new ArrayList<Actor>();
 
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="Movie_Director",
 	joinColumns=@JoinColumn(name="movieId"),
-	inverseJoinColumns=@JoinColumn(name="directorId"))
+	inverseJoinColumns=@JoinColumn(name="id"))
 	List<Director> directors = new ArrayList<Director>();
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	List<Character> characters = new ArrayList<Character>();
+	@OneToMany(mappedBy="movie")
+	List<Characters> characters = new ArrayList<Characters>();
 
-	public List<Actor> getActors() {
-		return actors;
-	}
-
-	public void setActors(List<Actor> actor) {
-		this.actors = actor;
-	}
-
-	public int getId() {
+	public int getMovieId() {
 		return movieId;
 	}
 
-	public void setId(int id) {
-		this.movieId = id;
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
+	}
+
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
 	}
 
 	public int getRating() {
@@ -79,22 +75,6 @@ public class Movie {
 		this.rating = rating;
 	}
 
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public byte[] getCover() {
-		return cover;
-	}
-
-	public void setCover(byte[] fileData) {
-		this.cover = fileData;
-	}
-
 	public Date getReleaseYear() {
 		return releaseYear;
 	}
@@ -102,5 +82,55 @@ public class Movie {
 	public void setReleaseYear(Date releaseYear) {
 		this.releaseYear = releaseYear;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
+
+	public byte[] getCover() {
+		return cover;
+	}
+
+	public void setCover(byte[] cover) {
+		this.cover = cover;
+	}
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+
+	public List<Director> getDirectors() {
+		return directors;
+	}
+
+	public void setDirectors(List<Director> directors) {
+		this.directors = directors;
+	}
+
+	public List<Characters> getCharacters() {
+		return characters;
+	}
+
+	public void setCharacters(List<Characters> characters) {
+		this.characters = characters;
+	}
+
+	
 
 }
