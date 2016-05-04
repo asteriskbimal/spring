@@ -23,26 +23,23 @@ public class Application {
 
 	public static void main(String[] args) {
         
+		//new Application().getMovieDetailsFromView();
 		new Application().listMovies();
-		
 	}
 	
 	public void listMovies(){
 		
 		List<Movie> movie1=movieDao.getAllMovies();
 		for(Movie m: movie1){
-			System.out.println("<---"+m.getMovieId()+":"+m.getName()+":"+m.getRating()+"--->");
-			for(Actor a: m.getActors()){
-				System.out.println("<---"+a.getId()+":"+a.getName()+":"+"--->");
-			}
-			for(Comments c:m.getComments()){
-				System.out.println("<---"+c.getId()+":"+c.getComment()+"--->");
-			}
-			
+			System.out.println("-----------------------------------------------------------");
+			System.out.println(m);
+			System.out.println("-----------------------------------------------------------");
+					
 		}
 	}
 
-	public void addMovies(){
+	public void addMovieDetailsFromView(){
+		
 		Movie movie=new Movie();
 		List<Actor> actors=new ArrayList<Actor>();
 		List<Director> directors=new ArrayList<Director>();

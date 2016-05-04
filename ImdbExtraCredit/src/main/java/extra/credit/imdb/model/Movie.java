@@ -131,6 +131,30 @@ public class Movie {
 		this.characters = characters;
 	}
 
-	
+	@Override
+	public String toString(){
+		
+		String s="";
+		s="Movie Name:"+this.getName()+"\n";
+		s=s+"Rating:"+this.getRating()+"\n";
+		s=s+"Actors:";
+		for(Actor a: this.getActors()){
+			s=s+a.getName()+",";
+		}
+		s=s+"\n";
+		s=s+"Directors:";
+		for(Director a: this.getDirectors()){
+			s=s+a.getName()+",";
+		}
+		s=s+"\n";
+		s=s+"Comments:";
+		for(Comments c:this.getComments()){
+			s=s+c.getComment()+",";
+		}
+		s=s+"\n";
+		s=s+"Release Date:"+this.getReleaseYear()+"\n";
+		s=s+"Genre:"+this.getGenre();
+		return s;
+	}
 
 }
