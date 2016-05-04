@@ -19,9 +19,30 @@ import extra.credit.imdb.model.Movie;
 
 public class Application {
 	
+	MovieDao movieDao=new MovieDao();
 
 	public static void main(String[] args) {
         
+		new Application().listMovies();
+		
+	}
+	
+	public void listMovies(){
+		
+		List<Movie> movie1=movieDao.getAllMovies();
+		for(Movie m: movie1){
+			System.out.println("<---"+m.getMovieId()+":"+m.getName()+":"+m.getRating()+"--->");
+			for(Actor a: m.getActors()){
+				System.out.println("<---"+a.getId()+":"+a.getName()+":"+"--->");
+			}
+			for(Comments c:m.getComments()){
+				System.out.println("<---"+c.getId()+":"+c.getComment()+"--->");
+			}
+			
+		}
+	}
+
+	public void addMovies(){
 		Movie movie=new Movie();
 		List<Actor> actors=new ArrayList<Actor>();
 		List<Director> directors=new ArrayList<Director>();
@@ -29,7 +50,7 @@ public class Application {
 		List<Comments> comments=new ArrayList<Comments>();
 		
 		Actor actor1=new Actor();
-		actor1.setName("Arnold");
+		actor1.setName("Arnold3");
 		Path p = FileSystems.getDefault().getPath("C:\\Users\\bimal\\git\\imdb\\ImdbExtraCredit\\images", "arnold.jpg");
 		byte[] fileData = null;
 		try {
@@ -41,7 +62,7 @@ public class Application {
 		actor1.setImage(fileData);
 		
 		Actor actor2=new Actor();
-		actor2.setName("Bruce Willis");
+		actor2.setName("Bruce Willis3");
 		 p = FileSystems.getDefault().getPath("C:\\Users\\bimal\\git\\imdb\\ImdbExtraCredit\\images", "BruceWillis.jpg");
 		fileData = null;
 		try {
@@ -52,7 +73,7 @@ public class Application {
 		}
 		actor2.setImage(fileData);
 		Actor actor3=new Actor();
-		actor3.setName("Silvestor Stalone");
+		actor3.setName("Silvestor Stalone3");
 		 p = FileSystems.getDefault().getPath("C:\\Users\\bimal\\git\\imdb\\ImdbExtraCredit\\images", "SilvestorStalone.jpg");
 		 fileData = null;
 		try {
@@ -64,7 +85,7 @@ public class Application {
 		actor3.setImage(fileData);
 		
 		Director director=new Director();
-		director.setName("Silvestor Stalone");
+		director.setName("Silvestor Stalone3");
 		 p = FileSystems.getDefault().getPath("C:\\Users\\bimal\\git\\imdb\\ImdbExtraCredit\\images", "SilvestorStalone.jpg");
 		 fileData = null;
 		try {
@@ -77,30 +98,30 @@ public class Application {
 		director.setImage(fileData);
 		
 		Characters character1=new Characters();
-		character1.setName("Barney Ross");
+		character1.setName("Barney Ross7");
 		character1.setActor(actor3);
 		character1.setMovie(movie);
 		
 		Characters character2=new Characters();
-		character2.setName("Mr. Church");
+		character2.setName("Mr. Church7");
 		character2.setActor(actor2);
 		character2.setMovie(movie);
 		
 		Characters character3=new Characters();
-		character3.setName("Trench");
+		character3.setName("Trench7");
 		character3.setActor(actor1);
 		character3.setMovie(movie);
 		
 		Comments comment1=new Comments();
-		comment1.setComment("Excellent Movie");
+		comment1.setComment("Excellent Movie7");
 		comment1.setMovie(movie);
 		
 		Comments comment2=new Comments();
-		comment2.setComment("Good Movie");
+		comment2.setComment("Good Movie7");
 		comment2.setMovie(movie);
 		
 		Comments comment3=new Comments();
-		comment3.setComment("Not Bad Movie");
+		comment3.setComment("Not Bad Movie7");
 		comment3.setMovie(movie);
 		
 		comments.add(comment1);
@@ -123,8 +144,9 @@ public class Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		movie.setCover(fileData);	
-		movie.setName("The Expandables");
+		movie.setCover(fileData);
+		System.out.println(actor1.getMovies()+"-----------------");
+		movie.setName("The Expandables7");
 		movie.setRating(8);
 		movie.setActors(actors);
 		movie.setCharacters(characterz);
@@ -132,10 +154,6 @@ public class Application {
 		movie.setComments(comments);
 		movie.setReleaseYear(new Date());
 		movie.setGenre(Genre.action);
-		
-		MovieDao movieDao=new MovieDao();
 		movieDao.saveMovie(movie);
-	    System.out.println(movieDao.getMovie(1).getName());
 	}
-
 }
