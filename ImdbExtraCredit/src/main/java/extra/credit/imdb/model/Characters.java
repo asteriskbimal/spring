@@ -1,10 +1,13 @@
 package extra.credit.imdb.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -14,16 +17,18 @@ public class Characters {
 	@Id
 	@GeneratedValue
 	private int characterId;
+	
 	@Column(name="charz")
 	private String name;
+	
 	@OneToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "pid")
 	private Actor actor;
+	
 	@ManyToOne
 	@JoinColumn(name = "movieId")
 	private Movie movie;
 	
-
 	public Actor getActor() {
 		return actor;
 	}

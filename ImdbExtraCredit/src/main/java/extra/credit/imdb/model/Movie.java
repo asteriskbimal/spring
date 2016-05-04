@@ -30,26 +30,26 @@ public class Movie {
 	private Date releaseYear;
 	private String name;
 	
-	@OneToMany
-	private List<Comments> comments=new ArrayList<Comments>();
-	
 	@Lob
 	private byte[] cover;
 
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="Movie_Actor",
 	joinColumns=@JoinColumn(name="movieId"),
-	inverseJoinColumns=@JoinColumn(name="id"))
+	inverseJoinColumns=@JoinColumn(name="pid"))
 	List<Actor> actors = new ArrayList<Actor>();
 
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="Movie_Director",
 	joinColumns=@JoinColumn(name="movieId"),
-	inverseJoinColumns=@JoinColumn(name="id"))
+	inverseJoinColumns=@JoinColumn(name="pid"))
 	List<Director> directors = new ArrayList<Director>();
 	
-	@OneToMany(mappedBy="movie")
+	@OneToMany(cascade=CascadeType.ALL)
 	List<Characters> characters = new ArrayList<Characters>();
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Comments> comments=new ArrayList<Comments>();
 
 	public int getMovieId() {
 		return movieId;

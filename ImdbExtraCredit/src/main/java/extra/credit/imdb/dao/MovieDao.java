@@ -13,6 +13,7 @@ import extra.credit.imdb.model.Movie;
 public class MovieDao implements IMovieDao{
 
 	private static EntityManagerFactory emf;
+	EntityManager em;
 
 	static {
 		try {
@@ -22,14 +23,24 @@ public class MovieDao implements IMovieDao{
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
-
-	EntityManager em = emf.createEntityManager();
 	
-	public Movie saveMovie(Movie movie) {
-
-		Movie attached = em.find(Movie.class, movie.getMovieId());
-		if (attached != null) em.persist(movie);	
-		return attached;
+	public MovieDao(){
+		em = emf.createEntityManager();
+		System.out.println(emf);
+	}
+	
+	
+	
+	public void saveMovie(Movie movie) {
+         em.getTransaction().begin();
+		//Movie attached = em.find(Movie.class, movie.getMovieId());
+		System.out.println("savemovie before");
+		//if (attached != null) {
+			System.out.println("save movie after");
+			em.persist(movie);
+			em.getTransaction().commit();
+		//}
+		//return attached;
 	}
 
 	public void updateMovie(Movie movie,int id) {
@@ -51,8 +62,7 @@ public class MovieDao implements IMovieDao{
 		em.getTransaction().begin();
 		em.remove(movie);
 		em.getTransaction().commit();
-		emf.close();
-
+		
 	}
 
 	public List<Movie> getAllMovies() {

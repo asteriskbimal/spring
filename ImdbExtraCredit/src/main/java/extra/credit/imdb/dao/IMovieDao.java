@@ -6,7 +6,7 @@ import extra.credit.imdb.model.Movie;
 
 public interface IMovieDao {
 
-	public Movie saveMovie(Movie movie);
+	public void saveMovie(Movie movie);
 
 	public void updateMovie(Movie movie, int id);
 
